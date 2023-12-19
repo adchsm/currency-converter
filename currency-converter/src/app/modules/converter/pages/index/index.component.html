@@ -1,1 +1,5 @@
-<p>index works!</p>
+<select *ngIf="currencies$ | async as currencies">
+  <option *ngFor="let currency of currencies">
+    {{ currency.name }} ({{ currency.symbol }})
+  </option>
+</select>
