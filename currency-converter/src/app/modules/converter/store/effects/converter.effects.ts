@@ -3,6 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { FixerService } from '../../services/fixer.service';
 import {
+  getConversion,
+  getConversionFailure,
+  getConversionSuccess,
   getCurrencies,
   getCurrenciesFailure,
   getCurrenciesSuccess,
@@ -26,6 +29,20 @@ export class ConverterEffects {
             })
           ),
           catchError((error) => of(getCurrenciesFailure({ error })))
+        )
+      )
+    )
+  );
+
+  getConversion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getConversion),
+      exhaustMap(({ from, to, amount }) =>
+        this.fixerService.getConversion(from, to, amount).pipe(
+          map(({ result }) =>
+            getConversionSuccess({ conversion: { from, to, amount, result } })
+          ),
+          catchError((error) => of(getConversionFailure({ error })))
         )
       )
     )

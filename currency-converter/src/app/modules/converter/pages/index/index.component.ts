@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Currency } from '../../models/converter.models';
-import { getCurrencies } from '../../store/actions/converter.actions';
+import { Observable, combineLatest, map, startWith } from 'rxjs';
+import { Conversion, Currency } from '../../models/converter.models';
 import {
+  getConversion,
+  getCurrencies,
+} from '../../store/actions/converter.actions';
+import {
+  selectConversionData,
+  selectConversionError,
+  selectConversionLoading,
   selectCurrenciesData,
   selectCurrenciesError,
   selectCurrenciesLoading,
@@ -17,19 +23,39 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndexComponent implements OnInit {
-  protected form: FormGroup = this.formBuilder.group({
-    amount: [1, [Validators.required, Validators.min(0)]],
-    fromCurrency: ['GBP', Validators.required],
-    toCurrency: ['EUR', Validators.required],
-  });
-
+  // Currencies
   protected currencies$: Observable<Currency[] | null> =
     this.store.select(selectCurrenciesData);
   protected currenciesLoading$: Observable<boolean> = this.store.select(
     selectCurrenciesLoading
   );
-  protected error$: Observable<any> = this.store.select(selectCurrenciesError);
+  protected currenciesError$: Observable<any> = this.store.select(
+    selectCurrenciesError
+  );
 
+  // Conversion
+  protected conversion$: Observable<Conversion | null> =
+    this.store.select(selectConversionData);
+  protected conversionLoading$: Observable<boolean> = this.store.select(
+    selectConversionLoading
+  );
+  protected conversionError$: Observable<any> = this.store.select(
+    selectConversionError
+  );
+
+  // Form
+  protected form: FormGroup = this.formBuilder.group({
+    amount: [1, [Validators.required, Validators.min(0)]],
+    from: ['GBP', Validators.required],
+    to: ['EUR', Validators.required],
+  });
+
+  protected disableSubmitButton$: Observable<boolean> = combineLatest([
+    this.form.statusChanges.pipe(startWith(this.form.status)),
+    this.conversionLoading$,
+  ]).pipe(map(([status, loading]) => status === 'INVALID' || !!loading));
+
+  // Class
   constructor(private store: Store, private formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
@@ -37,6 +63,6 @@ export class IndexComponent implements OnInit {
   }
 
   protected submit(): void {
-    console.log('Submitted with ', this.form.value);
+    this.store.dispatch(getConversion(this.form.value));
   }
 }

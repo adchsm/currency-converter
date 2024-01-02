@@ -1,5 +1,7 @@
+// State
 export interface ConverterState {
   currencies: DataState<Currency[]>;
+  conversion: DataState<Conversion>;
 }
 
 export interface DataState<T> {
@@ -8,6 +10,20 @@ export interface DataState<T> {
   error: any;
 }
 
+// Models
+export interface Currency {
+  name: string;
+  symbol: string;
+}
+
+export interface Conversion {
+  from: string;
+  to: string;
+  amount: number;
+  result: number;
+}
+
+// Responses
 export interface SymbolsResponse {
   success: boolean;
   symbols: {
@@ -15,7 +31,18 @@ export interface SymbolsResponse {
   };
 }
 
-export interface Currency {
-  name: string;
-  symbol: string;
+export interface ConvertResponse {
+  success: boolean;
+  query: {
+    from: string;
+    to: string;
+    amount: number;
+  };
+  info: {
+    timestamp: number;
+    rate: number;
+  };
+  historical: boolean;
+  date: string;
+  result: number;
 }

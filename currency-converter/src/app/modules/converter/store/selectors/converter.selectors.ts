@@ -22,3 +22,23 @@ export const selectCurrenciesError = createSelector(
   selectCurrenciesState,
   (state) => state.error
 );
+
+export const selectConversionState = createSelector(
+  selectConverter,
+  (state) => state.conversion
+);
+
+export const selectConversionLoading = createSelector(
+  selectConversionState,
+  (state) => state.loading
+);
+
+export const selectConversionData = createSelector(
+  selectConversionState,
+  (state) => state.data
+);
+
+export const selectConversionError = createSelector(
+  selectConversionState,
+  (state) => state.error
+);
