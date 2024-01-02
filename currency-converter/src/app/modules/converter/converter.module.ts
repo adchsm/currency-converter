@@ -7,9 +7,11 @@ import { ConverterRoutingModule } from './converter-routing.module';
 import { IndexComponent } from './pages/index/index.component';
 import { ConverterEffects } from './store/effects/converter.effects';
 import { converterFeature } from './store/reducers/converter.reducers';
+import { FormComponent } from './containers/form/form.component';
+import { ConversionComponent } from './containers/conversion/conversion.component';
 
 @NgModule({
-  declarations: [IndexComponent],
+  declarations: [IndexComponent, FormComponent, ConversionComponent],
   imports: [
     // Angular
     CommonModule,

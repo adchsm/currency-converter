@@ -1,0 +1,36 @@
+<form
+  *ngIf="currencies$ | async as currencies"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <input formControlName="amount" type="number" />
+
+  <select formControlName="from">
+    <option *ngFor="let currency of currencies" [value]="currency.symbol">
+      {{ currency.name }} ({{ currency.symbol }})
+    </option>
+  </select>
+
+  <select formControlName="to">
+    <option *ngFor="let currency of currencies" [value]="currency.symbol">
+      {{ currency.name }} ({{ currency.symbol }})
+    </option>
+  </select>
+
+  <button type="submit" [disabled]="disableSubmitButton$ | async">
+    <ng-container *ngIf="conversionLoading$ | async; else submitText">
+      Loading conversion...
+    </ng-container>
+    <ng-template #submitText>Get conversion</ng-template>
+  </button>
+</form>
+
+<ng-container *ngIf="currenciesLoading$ | async">
+  Loading currencies...
+</ng-container>
+
+<ng-container *ngIf="currenciesError$ | async as error">
+  <p>We're sorry, an error has occured:</p>
+
+  <pre>{{ error | json }}</pre>
+</ng-container>
