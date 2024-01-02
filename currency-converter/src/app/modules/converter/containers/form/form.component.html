@@ -3,25 +3,74 @@
   [formGroup]="form"
   (ngSubmit)="submit()"
 >
-  <input formControlName="amount" type="number" />
+  <div class="form-grid">
+    <div>
+      <h4>Amount</h4>
 
-  <select formControlName="from">
-    <option *ngFor="let currency of currencies" [value]="currency.symbol">
-      {{ currency.name }} ({{ currency.symbol }})
-    </option>
-  </select>
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input
+          matInput
+          placeholder="Placeholder"
+          formControlName="amount"
+          type="number"
+        />
+      </mat-form-field>
+    </div>
 
-  <select formControlName="to">
-    <option *ngFor="let currency of currencies" [value]="currency.symbol">
-      {{ currency.name }} ({{ currency.symbol }})
-    </option>
-  </select>
+    <div>
+      <h4>From currency</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Currency</mat-label>
+        <mat-select formControlName="from">
+          <mat-option
+            *ngFor="let currency of currencies"
+            [value]="currency.symbol"
+          >
+            {{ currency.name }} ({{ currency.symbol }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <button type="submit" [disabled]="disableSubmitButton$ | async">
+    <div>
+      <h4>To currency</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Currency</mat-label>
+        <mat-select formControlName="to">
+          <mat-option
+            *ngFor="let currency of currencies"
+            [value]="currency.symbol"
+          >
+            {{ currency.name }} ({{ currency.symbol }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button
+    mat-button
+    color="primary"
+    type="submit"
+    [disabled]="disableSubmitButton$ | async"
+  >
     <ng-container *ngIf="conversionLoading$ | async; else submitText">
-      Loading conversion...
+      <div class="align-button-icon">
+        <mat-spinner diameter="16"></mat-spinner>
+        <span>Loading</span>
+      </div>
     </ng-container>
-    <ng-template #submitText>Get conversion</ng-template>
+
+    <ng-template #submitText>
+      <div class="align-button-icon">
+        <mat-icon
+          class="convert-icon-size"
+          fontIcon="currency_exchange"
+        ></mat-icon>
+        <span>Get conversion</span>
+      </div>
+    </ng-template>
   </button>
 </form>
 

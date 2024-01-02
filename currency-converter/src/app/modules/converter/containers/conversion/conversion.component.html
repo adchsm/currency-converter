@@ -1,16 +1,30 @@
 <ng-container *ngIf="conversion$ | async as conversion">
+  <hr />
+
+  <h2>Result</h2>
+
   <p>
-    {{ conversion.amount | currency : conversion.from }} =
-    {{ conversion.result | currency : conversion.to }}
+    Your converted amount of
+    <strong>{{ conversion.amount | currency : conversion.from }}</strong>
+    =
+    <strong>{{ conversion.result | currency : conversion.to }}</strong>
   </p>
 </ng-container>
 
 <ng-container *ngIf="conversionLoading$ | async">
-  Loading conversion...
+  <hr />
+
+  <h2>Result</h2>
+
+  <p>Hold tight, we're converting...</p>
 </ng-container>
 
 <ng-container *ngIf="conversionError$ | async as error">
-  <p>We're sorry, an error has occured:</p>
+  <hr />
+
+  <h2>Uh oh</h2>
+
+  <p>It looks like somethings gone wrong:</p>
 
   <pre>{{ error | json }}</pre>
 </ng-container>

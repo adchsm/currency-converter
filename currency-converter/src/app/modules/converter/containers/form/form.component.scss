@@ -1,0 +1,25 @@
+.form-grid {
+  display: flex;
+  gap: 16px;
+  margin-top: 64px;
+
+  & > div {
+    flex-grow: 1;
+  }
+}
+
+.convert-icon-size {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.align-button-icon {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}
