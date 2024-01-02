@@ -1,5 +1,31 @@
-<select *ngIf="currencies$ | async as currencies">
-  <option *ngFor="let currency of currencies">
-    {{ currency.name }} ({{ currency.symbol }})
-  </option>
-</select>
+<form
+  *ngIf="form && currencies$ | async as currencies"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <input formControlName="amount" type="number" />
+
+  <select formControlName="fromCurrency">
+    <option *ngFor="let currency of currencies" [value]="currency.symbol">
+      {{ currency.name }} ({{ currency.symbol }})
+    </option>
+  </select>
+
+  <select formControlName="toCurrency">
+    <option *ngFor="let currency of currencies" [value]="currency.symbol">
+      {{ currency.name }} ({{ currency.symbol }})
+    </option>
+  </select>
+
+  <button type="submit" [disabled]="!form.valid">Submit</button>
+</form>
+
+<ng-container *ngIf="currenciesLoading$ | async">
+  Loading currencies...
+</ng-container>
+
+<ng-container *ngIf="error$ | async as error">
+  <p>We're sorry, an error has occured:</p>
+
+  <pre>{{ error | json }}</pre>
+</ng-container>

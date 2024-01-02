@@ -17,10 +17,12 @@ export class ConverterEffects {
         this.fixerService.getCurrencies().pipe(
           map(({ symbols }) =>
             getCurrenciesSuccess({
-              currencies: Object.entries(symbols).map(([symbol, name]) => ({
-                symbol,
-                name,
-              })),
+              currencies: Object.entries(symbols)
+                .map(([symbol, name]) => ({
+                  symbol,
+                  name,
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name)),
             })
           ),
           catchError((error) => of(getCurrenciesFailure({ error })))
