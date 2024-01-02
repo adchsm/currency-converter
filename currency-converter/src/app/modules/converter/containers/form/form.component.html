@@ -20,32 +20,24 @@
 
     <div>
       <h4>From currency</h4>
-      <mat-form-field appearance="outline">
-        <mat-label>Currency</mat-label>
-        <mat-select formControlName="from">
-          <mat-option
-            *ngFor="let currency of currencies"
-            [value]="currency.symbol"
-          >
-            {{ currency.name }} ({{ currency.symbol }})
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+
+      <app-currency-select
+        [currencies]="currencies"
+        [initialValue]="form.get('from')?.value"
+        (currencySelectionChange)="
+          handleCurrencySelectionChange($event, 'from')
+        "
+      ></app-currency-select>
     </div>
 
     <div>
       <h4>To currency</h4>
-      <mat-form-field appearance="outline">
-        <mat-label>Currency</mat-label>
-        <mat-select formControlName="to">
-          <mat-option
-            *ngFor="let currency of currencies"
-            [value]="currency.symbol"
-          >
-            {{ currency.name }} ({{ currency.symbol }})
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+
+      <app-currency-select
+        [currencies]="currencies"
+        [initialValue]="form.get('to')?.value"
+        (currencySelectionChange)="handleCurrencySelectionChange($event, 'to')"
+      ></app-currency-select>
     </div>
   </div>
 

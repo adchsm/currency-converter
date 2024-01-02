@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline">
+  <mat-label>Currency</mat-label>
+  <mat-select
+    (selectionChange)="handleSelectionChange($event)"
+    [value]="initialValue"
+  >
+    <mat-option *ngFor="let currency of currencies" [value]="currency.symbol">
+      {{ currency.name }} ({{ currency.symbol }})
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -44,6 +44,13 @@ export class FormComponent {
 
   constructor(private store: Store, private formBuilder: FormBuilder) {}
 
+  protected handleCurrencySelectionChange(
+    symbol: string,
+    control: 'from' | 'to'
+  ): void {
+    this.form.get(control)?.setValue(symbol);
+  }
+
   protected submit(): void {
     this.store.dispatch(getConversion(this.form.value));
   }

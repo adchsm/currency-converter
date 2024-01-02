@@ -15,9 +15,10 @@ import { ConverterRoutingModule } from './converter-routing.module';
 import { IndexComponent } from './pages/index/index.component';
 import { ConverterEffects } from './store/effects/converter.effects';
 import { converterFeature } from './store/reducers/converter.reducers';
+import { CurrencySelectComponent } from './components/currency-select/currency-select.component';
 
 @NgModule({
-  declarations: [IndexComponent, FormComponent, ConversionComponent],
+  declarations: [IndexComponent, FormComponent, ConversionComponent, CurrencySelectComponent],
   imports: [
     // Angular
     CommonModule,
