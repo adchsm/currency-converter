@@ -1,7 +1,19 @@
+@use "variables" as variables;
+
 .card {
   background-color: #ffffff;
   border-radius: 32px;
-  padding: 64px;
-  width: 900px;
   border: 8px solid #f8f7f4;
+  padding: 32px;
+  width: 90%;
+  margin: 0 auto;
+
+  @media (min-width: variables.$mq-tablet) {
+    padding: 64px;
+    width: 700px;
+  }
+
+  @media (min-width: variables.$mq-desktop) {
+    width: 900px;
+  }
 }

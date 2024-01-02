@@ -1,23 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.mat-typography {
-  h1,
-  h2 {
-    font-family: "Noto Serif", serif;
-  }
-
-  h1 {
-    font-size: 48px;
-    margin-bottom: 32px;
-  }
-}
+@use "./styles/variables";
+@use "./styles/media-queries";
+@use "./styles/material-and-overrides";
+@use "./styles/typography";

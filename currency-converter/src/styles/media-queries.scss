@@ -1,0 +1,25 @@
+@use "variables" as variables;
+
+.mobile-only {
+  display: none !important;
+
+  @media (max-width: (variables.$mq-tablet - 1)) {
+    display: block !important;
+  }
+}
+
+.tablet-up {
+  display: none !important;
+
+  @media (min-width: variables.$mq-tablet) {
+    display: block !important;
+  }
+}
+
+.desktop-only {
+  display: none !important;
+
+  @media (min-width: variables.$mq-desktop) {
+    display: block !important;
+  }
+}

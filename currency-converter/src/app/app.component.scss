@@ -1,12 +1,13 @@
+@use "variables" as variables;
+
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: rgb(255, 254, 239);
   background: linear-gradient(
     186deg,
-    #f8f7f4 0%,
-    #f8f7f4 50%,
+    variables.$color-greige 0%,
+    variables.$color-greige 50%,
     #ffffff 50%,
     #ffffff 100%
   );
