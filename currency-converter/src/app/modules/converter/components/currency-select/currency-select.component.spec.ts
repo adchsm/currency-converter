@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencySelectComponent } from './currency-select.component';
 
@@ -21,5 +21,17 @@ describe('CurrencySelectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit the currency symbol when handleSelectionChange is called', () => {
+    spyOn(component.currencySelectionChange, 'emit');
+
+    const change = {
+      value: 'EUR',
+    } as MatSelectChange;
+
+    component.handleSelectionChange(change);
+
+    expect(component.currencySelectionChange.emit).toHaveBeenCalledWith('EUR');
   });
 });

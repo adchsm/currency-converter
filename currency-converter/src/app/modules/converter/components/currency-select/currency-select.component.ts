@@ -20,7 +20,7 @@ export class CurrencySelectComponent {
   @Output() public currencySelectionChange: EventEmitter<string> =
     new EventEmitter();
 
-  protected handleSelectionChange(change: MatSelectChange): void {
+  public handleSelectionChange(change: MatSelectChange): void {
     this.currencySelectionChange.emit(change.value);
   }
 }

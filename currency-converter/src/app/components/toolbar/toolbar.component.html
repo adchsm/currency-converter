@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button mat-button routerLink="/">
+  <button mat-button routerLink="/" data-test="button-logo">
     <mat-icon fontIcon="currency_exchange"></mat-icon>
     Currency Conversion
   </button>
@@ -30,6 +30,7 @@
   <button mat-button [matMenuTriggerFor]="menu" class="mobile-only">
     Menu
   </button>
+
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <div class="align-button-icon">
