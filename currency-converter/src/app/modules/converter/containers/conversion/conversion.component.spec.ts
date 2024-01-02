@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
 import { ConversionComponent } from './conversion.component';
 
 describe('ConversionComponent', () => {
@@ -9,6 +9,7 @@ describe('ConversionComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ConversionComponent],
+      providers: [provideMockStore({})],
     });
     fixture = TestBed.createComponent(ConversionComponent);
     component = fixture.componentInstance;

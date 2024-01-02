@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
 import { FormComponent } from './form.component';
 
 describe('FormComponent', () => {
@@ -8,7 +8,8 @@ describe('FormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormComponent]
+      declarations: [FormComponent],
+      providers: [provideMockStore({})],
     });
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
